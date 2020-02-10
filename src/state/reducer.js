@@ -181,7 +181,6 @@ export default (state: State = idle, action: Action): State => {
   }
 
   if (action.type === 'MOVE') {
-    console.log('MOVE')
 
     // Not allowing any more movements
     if (state.phase === 'DROP_PENDING') {
@@ -258,8 +257,6 @@ export default (state: State = idle, action: Action): State => {
       isMovementAllowed(state),
       `${action.type} not permitted in phase ${state.phase}`,
     );
-
-    console.log(target);
 
     // This is possible if a droppable has been asked to watch scroll but
     // the dimension has not been published yet

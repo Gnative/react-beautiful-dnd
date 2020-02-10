@@ -15,8 +15,6 @@ export default (
 ): DroppableDimension => {
   invariant(droppable.frame);
 
-  console.log('offset dimensions', offsets, droppable);
-
   const scrollable: Scrollable = droppable.frame;
   const newScroll = scrollable.scroll.initial + offsets.top;
   const scrollDiff: Position = subtract(newScroll, scrollable.scroll.initial);

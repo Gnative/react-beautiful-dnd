@@ -427,7 +427,6 @@ var scrollDroppable = (function (droppable, newScroll) {
 
 var withDimensionsOffsets = (function (droppable, offsets) {
   !droppable.frame ? process.env.NODE_ENV !== "production" ? invariant(false) : invariant(false) : void 0;
-  console.log('offset dimensions', offsets, droppable);
   var scrollable = droppable.frame;
   var newScroll = scrollable.scroll.initial + offsets.top;
   var scrollDiff = subtract(newScroll, scrollable.scroll.initial);
@@ -2666,8 +2665,6 @@ var reducer = (function (state, action) {
   }
 
   if (action.type === 'MOVE') {
-    console.log('MOVE');
-
     if (state.phase === 'DROP_PENDING') {
       return state;
     }
@@ -2720,7 +2717,6 @@ var reducer = (function (state, action) {
     var _target = state.dimensions.droppables[_id];
     !_target ? process.env.NODE_ENV !== "production" ? invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its dimensions state") : invariant(false) : void 0;
     !isMovementAllowed(state) ? process.env.NODE_ENV !== "production" ? invariant(false, action.type + " not permitted in phase " + state.phase) : invariant(false) : void 0;
-    console.log(_target);
 
     if (!_target) {
       return state;

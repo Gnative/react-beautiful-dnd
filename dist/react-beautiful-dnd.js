@@ -1069,7 +1069,6 @@
 
   var withDimensionsOffsets = (function (droppable, offsets) {
     !droppable.frame ?  invariant(false)  : void 0;
-    console.log('offset dimensions', offsets, droppable);
     var scrollable = droppable.frame;
     var newScroll = scrollable.scroll.initial + offsets.top;
     var scrollDiff = subtract(newScroll, scrollable.scroll.initial);
@@ -3359,8 +3358,6 @@
     }
 
     if (action.type === 'MOVE') {
-      console.log('MOVE');
-
       if (state.phase === 'DROP_PENDING') {
         return state;
       }
@@ -3413,7 +3410,6 @@
       var _target = state.dimensions.droppables[_id];
       !_target ?  invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its dimensions state")  : void 0;
       !isMovementAllowed(state) ?  invariant(false, action.type + " not permitted in phase " + state.phase)  : void 0;
-      console.log(_target);
 
       if (!_target) {
         return state;
