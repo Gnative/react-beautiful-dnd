@@ -74,6 +74,10 @@ export default (registry: Registry, callbacks: Callbacks) => {
     registry,
   });
 
+  const updateDroppableDimensions = (id: DroppableId, dimensionsOffsets: object) => {
+    callbacks.updateDroppableDimensions({ id, dimensionsOffsets });
+  };
+
   const updateDroppableIsEnabled = (id: DroppableId, isEnabled: boolean) => {
     invariant(
       registry.droppable.exists(id),
@@ -205,6 +209,7 @@ export default (registry: Registry, callbacks: Callbacks) => {
   const marshal: DimensionMarshal = {
     // Droppable changes
     updateDroppableIsEnabled,
+    updateDroppableDimensions,
     updateDroppableIsCombineEnabled,
     scrollDroppable,
     updateDroppableScroll,
