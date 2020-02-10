@@ -13,6 +13,9 @@ export default (
   droppable: DroppableDimension,
   newScroll: Position,
 ): DroppableDimension => {
+
+  return dropaable;
+
   invariant(droppable.frame);
   const scrollable: Scrollable = droppable.frame;
 

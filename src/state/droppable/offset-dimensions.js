@@ -16,8 +16,14 @@ export default (
   invariant(droppable.frame);
 
   const scrollable: Scrollable = droppable.frame;
-  const newScroll = scrollable.scroll.initial + offsets.top;
-  const scrollDiff: Position = subtract(newScroll, scrollable.scroll.initial);
+
+  const newScroll = {
+    x: 0,
+    y: offsets.top,
+  }
+
+  const scrollDiff: Position = add(newScroll, scrollable.scroll.initial);
+  //const scrollDiff: Position = subtract(newScroll, scrollable.scroll.initial);
 
   // a positive scroll difference leads to a negative displacement
   // (scrolling down pulls an item upwards)
