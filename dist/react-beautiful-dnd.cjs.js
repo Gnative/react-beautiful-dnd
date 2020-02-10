@@ -2707,7 +2707,7 @@ var reducer = (function (state, action) {
   }
 
   if (action.type === 'UPDATE_DROPPABLE_DIMENSIONS') {
-    if (state.phase === 'DROP_PENDING' || !state.dimensions) {
+    if (state.phase === 'DROP_PENDING' || state.phase === 'COLLECTING' || !state.dimensions) {
       return state;
     }
 

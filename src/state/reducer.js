@@ -241,7 +241,7 @@ export default (state: State = idle, action: Action): State => {
 
   if (action.type === 'UPDATE_DROPPABLE_DIMENSIONS') {
     // Things are locked at this point
-    if (state.phase === 'DROP_PENDING' || !state.dimensions) {
+    if (state.phase === 'DROP_PENDING' || state.phase === 'COLLECTING' || !state.dimensions) {
       return state;
     }
 
