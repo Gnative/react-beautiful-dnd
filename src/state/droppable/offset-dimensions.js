@@ -18,7 +18,7 @@ export default (
   console.log('offset dimensions', offsets, droppable);
 
   const scrollable: Scrollable = droppable.frame;
-  const newScroll = scrollable.scroll.initial - offsets.top;
+  const newScroll = scrollable.scroll.initial + offsets.top;
   const scrollDiff: Position = subtract(newScroll, scrollable.scroll.initial);
 
   // a positive scroll difference leads to a negative displacement

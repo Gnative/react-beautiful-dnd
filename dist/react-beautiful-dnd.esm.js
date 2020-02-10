@@ -421,7 +421,36 @@ var scrollDroppable = (function (droppable, newScroll) {
 var withDimensionsOffsets = (function (droppable, offsets) {
   !droppable.frame ? process.env.NODE_ENV !== "production" ? invariant(false) : invariant(false) : void 0;
   console.log('offset dimensions', offsets, droppable);
-  return droppable;
+  var scrollable = droppable.frame;
+  var newScroll = scrollable.scroll.initial + offsets.top;
+  var scrollDiff = subtract(newScroll, scrollable.scroll.initial);
+  var scrollDisplacement = negate(scrollDiff);
+
+  var frame = _extends({}, scrollable, {
+    scroll: {
+      initial: scrollable.scroll.initial,
+      current: newScroll,
+      diff: {
+        value: scrollDiff,
+        displacement: scrollDisplacement
+      },
+      max: scrollable.scroll.max
+    }
+  });
+
+  var subject = getSubject({
+    page: droppable.subject.page,
+    withPlaceholder: droppable.subject.withPlaceholder,
+    axis: droppable.axis,
+    frame: frame
+  });
+
+  var result = _extends({}, droppable, {
+    frame: frame,
+    subject: subject
+  });
+
+  return result;
 });
 
 function values(map) {
@@ -2673,8 +2702,6 @@ var reducer = (function (state, action) {
     return postDroppableChange(state, scrolled, false);
   }
 
-  console.log(state.phase);
-
   if (action.type === 'UPDATE_DROPPABLE_DIMENSIONS') {
     if (state.phase === 'DROP_PENDING' || !state.dimensions) {
       return state;
@@ -2683,7 +2710,6 @@ var reducer = (function (state, action) {
     var _action$payload3 = action.payload,
         _id = _action$payload3.id,
         dimensionsOffsets = _action$payload3.dimensionsOffsets;
-    console.log('UPDATE_DROPPABLE_DIMENSIONS', _id, dimensionsOffsets);
     var _target = state.dimensions.droppables[_id];
     !_target ? process.env.NODE_ENV !== "production" ? invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its dimensions state") : invariant(false) : void 0;
     console.log(_target);

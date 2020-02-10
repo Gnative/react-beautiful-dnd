@@ -240,24 +240,24 @@ export default (state: State = idle, action: Action): State => {
     return postDroppableChange(state, scrolled, false);
   }
 
-  console.log(state.phase);
-
   if (action.type === 'UPDATE_DROPPABLE_DIMENSIONS') {
     // Things are locked at this point
     if (state.phase === 'DROP_PENDING' || !state.dimensions) {
       return state;
     }
 
-    const {id, dimensionsOffsets} = action.payload
-    console.log('UPDATE_DROPPABLE_DIMENSIONS', id, dimensionsOffsets);
-
+    const { id, dimensionsOffsets } = action.payload;
     const target: ?DroppableDimension = state.dimensions.droppables[id];
-
 
     invariant(
       target,
       `Cannot find Droppable[id: ${id}] to toggle its dimensions state`,
     );
+
+    // invariant(
+    //   isMovementAllowed(state),
+    //   `${action.type} not permitted in phase ${state.phase}`,
+    // );
 
     console.log(target);
 
