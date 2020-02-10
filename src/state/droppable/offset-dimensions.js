@@ -15,9 +15,16 @@ export default (
 ): DroppableDimension => {
   invariant(droppable.frame);
 
-  console.log('offset dimensions', offsets, droppable );
+  console.log('offset dimensions', offsets, droppable);
 
-  /*
+  const scrollable: Scrollable = droppable.frame;
+  const newScroll = scrollable.scroll.initial - offsets.top;
+  const scrollDiff: Position = subtract(newScroll, scrollable.scroll.initial);
+
+  // a positive scroll difference leads to a negative displacement
+  // (scrolling down pulls an item upwards)
+  const scrollDisplacement: Position = negate(scrollDiff);
+
   // Sometimes it is possible to scroll beyond the max point.
   // This can occur when scrolling a foreign list that now has a placeholder.
   const frame: Scrollable = {
@@ -46,7 +53,6 @@ export default (
     frame,
     subject,
   };
-   */
 
-  return droppable;
+  return result;
 };

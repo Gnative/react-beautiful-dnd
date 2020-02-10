@@ -2669,14 +2669,14 @@ var reducer = (function (state, action) {
     !isMovementAllowed(state) ? process.env.NODE_ENV !== "production" ? invariant(false, action.type + " not permitted in phase " + state.phase) : invariant(false) : void 0;
     var _action$payload2 = action.payload,
         id = _action$payload2.id,
-        _newScroll = _action$payload2.newScroll;
+        newScroll = _action$payload2.newScroll;
     var target = state.dimensions.droppables[id];
 
     if (!target) {
       return state;
     }
 
-    var scrolled = scrollDroppable(target, _newScroll);
+    var scrolled = scrollDroppable(target, newScroll);
     return postDroppableChange(state, scrolled, false);
   }
 
@@ -2699,7 +2699,7 @@ var reducer = (function (state, action) {
       return state;
     }
 
-    var withOffsets = withDimensionsOffsets(_target, newScroll);
+    var withOffsets = withDimensionsOffsets(_target, dimensionsOffsets);
     return postDroppableChange(state, withOffsets, true);
   }
 
@@ -2750,13 +2750,13 @@ var reducer = (function (state, action) {
 
     !isMovementAllowed(state) ? process.env.NODE_ENV !== "production" ? invariant(false, "Cannot move by window in phase " + state.phase) : invariant(false) : void 0;
     !state.isWindowScrollAllowed ? process.env.NODE_ENV !== "production" ? invariant(false, 'Window scrolling is currently not supported for fixed lists') : invariant(false) : void 0;
-    var _newScroll2 = action.payload.newScroll;
+    var _newScroll = action.payload.newScroll;
 
-    if (isEqual(state.viewport.scroll.current, _newScroll2)) {
+    if (isEqual(state.viewport.scroll.current, _newScroll)) {
       return removeScrollJumpRequest(state);
     }
 
-    var _viewport = scrollViewport(state.viewport, _newScroll2);
+    var _viewport = scrollViewport(state.viewport, _newScroll);
 
     if (isSnapping(state)) {
       return refreshSnap({

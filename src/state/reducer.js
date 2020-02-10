@@ -267,7 +267,7 @@ export default (state: State = idle, action: Action): State => {
       return state;
     }
 
-    const withOffsets: DroppableDimension = withDimensionsOffsets(target, newScroll);
+    const withOffsets: DroppableDimension = withDimensionsOffsets(target, dimensionsOffsets);
     return postDroppableChange(state, withOffsets, true);
   }
 
