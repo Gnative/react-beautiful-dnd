@@ -2712,6 +2712,7 @@ var reducer = (function (state, action) {
         dimensionsOffsets = _action$payload3.dimensionsOffsets;
     var _target = state.dimensions.droppables[_id];
     !_target ? process.env.NODE_ENV !== "production" ? invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its dimensions state") : invariant(false) : void 0;
+    !isMovementAllowed(state) ? process.env.NODE_ENV !== "production" ? invariant(false, action.type + " not permitted in phase " + state.phase) : invariant(false) : void 0;
     console.log(_target);
 
     if (!_target) {

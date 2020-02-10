@@ -3412,6 +3412,7 @@
           dimensionsOffsets = _action$payload3.dimensionsOffsets;
       var _target = state.dimensions.droppables[_id];
       !_target ?  invariant(false, "Cannot find Droppable[id: " + _id + "] to toggle its dimensions state")  : void 0;
+      !isMovementAllowed(state) ?  invariant(false, action.type + " not permitted in phase " + state.phase)  : void 0;
       console.log(_target);
 
       if (!_target) {

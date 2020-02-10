@@ -254,10 +254,10 @@ export default (state: State = idle, action: Action): State => {
       `Cannot find Droppable[id: ${id}] to toggle its dimensions state`,
     );
 
-    // invariant(
-    //   isMovementAllowed(state),
-    //   `${action.type} not permitted in phase ${state.phase}`,
-    // );
+    invariant(
+      isMovementAllowed(state),
+      `${action.type} not permitted in phase ${state.phase}`,
+    );
 
     console.log(target);
 
