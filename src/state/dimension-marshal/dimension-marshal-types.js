@@ -3,6 +3,7 @@ import type { Position } from 'css-box-model';
 import type {
   UpdateDroppableScrollArgs,
   UpdateDroppableIsEnabledArgs,
+  UpdateDroppableDimensionsArgs,
   UpdateDroppableIsCombineEnabledArgs,
 } from '../action-creators';
 import type {
@@ -23,6 +24,7 @@ export type StartPublishingResult = {|
 export type DimensionMarshal = {|
   // it is possible for a droppable to change whether it is enabled during a drag
   updateDroppableIsEnabled: (id: DroppableId, isEnabled: boolean) => void,
+  updateDroppableDimensions: (id: DroppableId, dimensionsOffsets: object) => void,
   // it is also possible to update whether combining is enabled
   updateDroppableIsCombineEnabled: (
     id: DroppableId,
@@ -40,6 +42,7 @@ export type Callbacks = {|
   publishWhileDragging: (args: Published) => mixed,
   updateDroppableScroll: (args: UpdateDroppableScrollArgs) => mixed,
   updateDroppableIsEnabled: (args: UpdateDroppableIsEnabledArgs) => mixed,
+  updateDroppableDimensions: (args: UpdateDroppableDimensionsArgs) => mixed,
   updateDroppableIsCombineEnabled: (
     args: UpdateDroppableIsCombineEnabledArgs,
   ) => mixed,

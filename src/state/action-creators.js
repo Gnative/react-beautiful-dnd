@@ -111,6 +111,11 @@ export type UpdateDroppableIsEnabledArgs = {|
   isEnabled: boolean,
 |};
 
+export type UpdateDroppableDimensionsArgs = {|
+  id: DroppableId,
+  dimensionsOffsets: object,
+|};
+
 export type UpdateDroppableIsEnabledAction = {|
   type: 'UPDATE_DROPPABLE_IS_ENABLED',
   payload: UpdateDroppableIsEnabledArgs,
@@ -120,6 +125,13 @@ export const updateDroppableIsEnabled = (
   args: UpdateDroppableIsEnabledArgs,
 ): UpdateDroppableIsEnabledAction => ({
   type: 'UPDATE_DROPPABLE_IS_ENABLED',
+  payload: args,
+});
+
+export const updateDroppableDimensions = (
+  args: UpdateDroppableDimensionsArgs,
+): UpdateDroppableDimensionsAction => ({
+  type: 'UPDATE_DROPPABLE_DIMENSIONS',
   payload: args,
 });
 
@@ -310,6 +322,7 @@ export type Action =
   | CollectionStartingAction
   | UpdateDroppableScrollAction
   | UpdateDroppableIsEnabledAction
+  | UpdateDroppableDimensionsAction
   | UpdateDroppableIsCombineEnabledAction
   | MoveByWindowScrollAction
   | UpdateViewportMaxScrollAction

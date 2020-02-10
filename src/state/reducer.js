@@ -20,6 +20,7 @@ import type {
 import type { Action } from './store-types';
 import type { PublicResult as MoveInDirectionResult } from './move-in-direction/move-in-direction-types';
 import scrollDroppable from './droppable/scroll-droppable';
+import withDimensionsOffsets from './droppable/offset-dimensions';
 import moveInDirection from './move-in-direction';
 import { add, isEqual, origin } from './position';
 import scrollViewport from './scroll-viewport';
@@ -180,6 +181,8 @@ export default (state: State = idle, action: Action): State => {
   }
 
   if (action.type === 'MOVE') {
+    console.log('MOVE')
+
     // Not allowing any more movements
     if (state.phase === 'DROP_PENDING') {
       return state;
@@ -235,6 +238,37 @@ export default (state: State = idle, action: Action): State => {
 
     const scrolled: DroppableDimension = scrollDroppable(target, newScroll);
     return postDroppableChange(state, scrolled, false);
+  }
+
+  console.log(state.phase);
+
+  if (action.type === 'UPDATE_DROPPABLE_DIMENSIONS') {
+    // Things are locked at this point
+    if (state.phase === 'DROP_PENDING' || !state.dimensions) {
+      return state;
+    }
+
+    const {id, dimensionsOffsets} = action.payload
+    console.log('UPDATE_DROPPABLE_DIMENSIONS', id, dimensionsOffsets);
+
+    const target: ?DroppableDimension = state.dimensions.droppables[id];
+
+
+    invariant(
+      target,
+      `Cannot find Droppable[id: ${id}] to toggle its dimensions state`,
+    );
+
+    console.log(target);
+
+    // This is possible if a droppable has been asked to watch scroll but
+    // the dimension has not been published yet
+    if (!target) {
+      return state;
+    }
+
+    const withOffsets: DroppableDimension = withDimensionsOffsets(target, newScroll);
+    return postDroppableChange(state, withOffsets, true);
   }
 
   if (action.type === 'UPDATE_DROPPABLE_IS_ENABLED') {

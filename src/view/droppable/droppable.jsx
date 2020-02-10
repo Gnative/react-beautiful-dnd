@@ -48,6 +48,7 @@ export default function Droppable(props: Props) {
 
     // clone (ownProps)
     getContainerForClone,
+    dimensionsOffset,
   } = props;
 
   const getDroppableRef = useCallback(
@@ -87,6 +88,7 @@ export default function Droppable(props: Props) {
     isCombineEnabled,
     ignoreContainerClipping,
     getDroppableRef,
+    dimensionsOffset,
   });
 
   const placeholder: Node = (

@@ -238,6 +238,14 @@ export default function useDroppablePublisher(args: Props) {
     [callbacks, descriptor, uniqueId],
   );
 
+
+  useLayoutEffect(() => {
+    marshal.updateDroppableDimensions(
+      publishedDescriptorRef.current.id,
+      args.dimensionsOffset,
+    );
+  }, [args.dimensionsOffset, marshal]);
+
   // Register with the marshal and let it know of:
   // - any descriptor changes
   // - when it unmounts
